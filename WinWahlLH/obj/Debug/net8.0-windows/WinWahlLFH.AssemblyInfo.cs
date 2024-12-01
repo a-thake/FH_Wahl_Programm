@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WinWahlLFH")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e387242adac6904b4df72a843bac32190b5e7ac5")]
 [assembly: System.Reflection.AssemblyProductAttribute("WinWahlLFH")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WinWahlLFH")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

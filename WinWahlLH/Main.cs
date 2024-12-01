@@ -8,62 +8,61 @@ namespace WinWahlLFH
 {
     public partial class frmMain : Form
     {
-        private List<Wahl> _wahlen;
-
-        // Temporär
-        private List<Stimmzettel> _stimmzettelListe = new List<Stimmzettel>();
-
+        private List<Wahl> Wahlen;
         public frmMain()
         {
             InitializeComponent();
-            _wahlen = new List<Wahl>();
-            foreach (Wahl wahl in Program.Wahlen)
-                _wahlen.Add(wahl);
+            Wahlen = new List<Wahl>();
+            foreach (Wahl wahl in Program.alleWahlen)
+                Wahlen.Add(wahl);
             updateListe();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //if (lstWahlen.Items.Count < 1)
-            //{
-            grpWahl.Enabled = false;
-            //}
+            if (lstWahlen.Items.Count < 1)
+            {
+                grpWahl.Enabled = false;
+            }
         }
 
         private void btnNeu_Click(object sender, EventArgs e)
         {
             grpWahl.Enabled = true;
-
         }
 
         private void btnAbbrechen_Click(object sender, EventArgs e)
         {
-            //if (lstWahlen.Items.Count > 0)
-            //    grpWahl.Enabled = true;
-            //else
-            grpWahl.Enabled = false;
+            if (lstWahlen.Items.Count > 0)
+                grpWahl.Enabled = true;
+            else
+                grpWahl.Enabled = false;
         }
 
         private void btnSpeichern_Click(object sender, EventArgs e)
         {
+            //MessageBox.Show("Daten gespeichert.");
+
             Wahl wahl = new Wahl();
             wahl.SetTitel(txtTitel.Text);
             wahl.SetMaxStimmen((uint)numTermin.Value);
             wahl.Termin = dtpTermin.Value;
-            wahl.Id = (uint)this._wahlen.Count + 1;
-
-            this._wahlen.Add(wahl);
+            wahl.Id = (uint)this.Wahlen.Count + 1;
+            this.Wahlen.Add(wahl);
 
             updateListe();
-            grpWahl.Enabled = false;
 
-            MessageBox.Show("Die Wahl wurde gespeichert!");
+            if (lstWahlen.Items.Count > 0)
+                grpWahl.Enabled = true;
+            else
+                grpWahl.Enabled = false;
         }
 
         private void updateListe()
         {
             lstWahlen.Items.Clear();
-            foreach (Wahl wahl in _wahlen)
+            int id = 0;
+            foreach (Wahl wahl in Wahlen)
             {
                 lstWahlen.Items.Add(wahl.Name);
             }
@@ -74,35 +73,23 @@ namespace WinWahlLFH
 
         }
 
-        private void btnFormularAnzeigen_Click(object sender, EventArgs e)
+        private void lstWahlen_SelectedIndexChanged(object sender, EventArgs e)
         {
-            FrmWahl frmWahl = new FrmWahl();
 
-            // Standardaufruf
-            frmWahl.Show();
-            // Alternative als Dialog
-            //frmWahl.ShowDialog();
         }
 
-        private void btnStimmzettel_Click(object sender, EventArgs e)
+        private void WahlkreiseEditBtn_Click(object sender, EventArgs e)
         {
-            DialogResult result = DialogResult.Continue;
+            Form wahlkreiseFenster = new Wahlkreise();
 
-            while (result == DialogResult.Continue)
-            {
-                Stimmzettel stimmzettel = new Stimmzettel();
-                stimmzettel.MaxStimmen = 3;
-                stimmzettel.MaxKandidaten = 3;
+            wahlkreiseFenster.ShowDialog();
+        }
 
-                FrmStimmzettel frmStimmzettel = new FrmStimmzettel(stimmzettel);
+        private void KandidatenEditBtn_Click(object sender, EventArgs e)
+        {
+            Form kandidatenFenster = new Kandidaten();
 
-                result = frmStimmzettel.ShowDialog();
-
-                _stimmzettelListe.Add(frmStimmzettel.Stimmzettel());
-            }
-
-            MessageBox.Show($"Es wurden insgesamt {_stimmzettelListe.Count} Stimmzettel erfasst.");
-            
+            kandidatenFenster.ShowDialog();
         }
     }
 }

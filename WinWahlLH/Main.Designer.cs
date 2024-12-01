@@ -41,8 +41,8 @@
             txtTitel = new TextBox();
             btnNeu = new Button();
             btnLoeschen = new Button();
-            btnFormularAnzeigen = new Button();
-            btnStimmzettel = new Button();
+            WahlkreiseEditBtn = new Button();
+            KandidatenEditBtn = new Button();
             grpWahl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numTermin).BeginInit();
             SuspendLayout();
@@ -54,6 +54,7 @@
             lstWahlen.Name = "lstWahlen";
             lstWahlen.Size = new Size(372, 344);
             lstWahlen.TabIndex = 0;
+            lstWahlen.SelectedIndexChanged += lstWahlen_SelectedIndexChanged;
             // 
             // grpWahl
             // 
@@ -78,7 +79,7 @@
             btBearbeiten.Location = new Point(38, 313);
             btBearbeiten.Name = "btBearbeiten";
             btBearbeiten.Size = new Size(147, 29);
-            btBearbeiten.TabIndex = 7;
+            btBearbeiten.TabIndex = 9;
             btBearbeiten.Text = "Wahl bearbeiten";
             btBearbeiten.UseVisualStyleBackColor = true;
             btBearbeiten.Click += btBearbeiten_Click;
@@ -88,7 +89,7 @@
             btnAbbrechen.Location = new Point(144, 237);
             btnAbbrechen.Name = "btnAbbrechen";
             btnAbbrechen.Size = new Size(94, 29);
-            btnAbbrechen.TabIndex = 6;
+            btnAbbrechen.TabIndex = 8;
             btnAbbrechen.Text = "Abbrechen";
             btnAbbrechen.UseVisualStyleBackColor = true;
             btnAbbrechen.Click += btnAbbrechen_Click;
@@ -98,7 +99,7 @@
             btnSpeichern.Location = new Point(38, 236);
             btnSpeichern.Name = "btnSpeichern";
             btnSpeichern.Size = new Size(94, 29);
-            btnSpeichern.TabIndex = 5;
+            btnSpeichern.TabIndex = 7;
             btnSpeichern.Text = "Speichern";
             btnSpeichern.UseVisualStyleBackColor = true;
             btnSpeichern.Click += btnSpeichern_Click;
@@ -108,7 +109,7 @@
             numTermin.Location = new Point(40, 118);
             numTermin.Name = "numTermin";
             numTermin.Size = new Size(132, 27);
-            numTermin.TabIndex = 3;
+            numTermin.TabIndex = 6;
             // 
             // lblTermin
             // 
@@ -149,14 +150,14 @@
             txtTitel.Location = new Point(38, 56);
             txtTitel.Name = "txtTitel";
             txtTitel.Size = new Size(250, 27);
-            txtTitel.TabIndex = 2;
+            txtTitel.TabIndex = 0;
             // 
             // btnNeu
             // 
             btnNeu.Location = new Point(26, 392);
             btnNeu.Name = "btnNeu";
             btnNeu.Size = new Size(94, 29);
-            btnNeu.TabIndex = 1;
+            btnNeu.TabIndex = 3;
             btnNeu.Text = "Neue Wahl";
             btnNeu.UseVisualStyleBackColor = true;
             btnNeu.Click += btnNeu_Click;
@@ -166,44 +167,42 @@
             btnLoeschen.Location = new Point(126, 392);
             btnLoeschen.Name = "btnLoeschen";
             btnLoeschen.Size = new Size(94, 29);
-            btnLoeschen.TabIndex = 40;
+            btnLoeschen.TabIndex = 4;
             btnLoeschen.Text = "Löschen";
             btnLoeschen.UseVisualStyleBackColor = true;
             // 
-            // btnFormularAnzeigen
+            // WahlkreiseEditBtn
             // 
-            btnFormularAnzeigen.Location = new Point(561, 392);
-            btnFormularAnzeigen.Name = "btnFormularAnzeigen";
-            btnFormularAnzeigen.Size = new Size(163, 29);
-            btnFormularAnzeigen.TabIndex = 41;
-            btnFormularAnzeigen.Text = "Formular anzeigen";
-            btnFormularAnzeigen.UseVisualStyleBackColor = true;
-            btnFormularAnzeigen.Click += btnFormularAnzeigen_Click;
+            WahlkreiseEditBtn.Location = new Point(513, 392);
+            WahlkreiseEditBtn.Name = "WahlkreiseEditBtn";
+            WahlkreiseEditBtn.Size = new Size(211, 29);
+            WahlkreiseEditBtn.TabIndex = 5;
+            WahlkreiseEditBtn.Text = "Zeige Wahlkreise";
+            WahlkreiseEditBtn.UseVisualStyleBackColor = true;
+            WahlkreiseEditBtn.Click += WahlkreiseEditBtn_Click;
             // 
-            // btnStimmzettel
+            // KandidatenEditBtn
             // 
-            btnStimmzettel.Location = new Point(401, 392);
-            btnStimmzettel.Name = "btnStimmzettel";
-            btnStimmzettel.Size = new Size(132, 29);
-            btnStimmzettel.TabIndex = 42;
-            btnStimmzettel.Text = "Simmzettel";
-            btnStimmzettel.UseVisualStyleBackColor = true;
-            btnStimmzettel.Click += btnStimmzettel_Click;
+            KandidatenEditBtn.Location = new Point(513, 430);
+            KandidatenEditBtn.Name = "KandidatenEditBtn";
+            KandidatenEditBtn.RightToLeft = RightToLeft.Yes;
+            KandidatenEditBtn.Size = new Size(211, 29);
+            KandidatenEditBtn.TabIndex = 6;
+            KandidatenEditBtn.Text = "Zeige Kandidaten";
+            KandidatenEditBtn.UseVisualStyleBackColor = true;
+            KandidatenEditBtn.Click += KandidatenEditBtn_Click;
             // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(747, 468);
-            Controls.Add(btnStimmzettel);
-            Controls.Add(btnFormularAnzeigen);
+            Controls.Add(KandidatenEditBtn);
+            Controls.Add(WahlkreiseEditBtn);
             Controls.Add(btnLoeschen);
             Controls.Add(btnNeu);
             Controls.Add(grpWahl);
             Controls.Add(lstWahlen);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            MaximizeBox = false;
-            MinimizeBox = false;
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "WinWahl LFH";
@@ -229,7 +228,7 @@
         private Button btnSpeichern;
         private Button btnAbbrechen;
         private Button btBearbeiten;
-        private Button btnFormularAnzeigen;
-        private Button btnStimmzettel;
+        private Button WahlkreiseEditBtn;
+        private Button KandidatenEditBtn;
     }
 }
